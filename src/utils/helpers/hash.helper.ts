@@ -1,5 +1,9 @@
-import { hash as bcryptHash , compare as bcryptCompare} from 'bcrypt';
-import { secret_text } from '../../constants';
+import { hash as bcryptHash, compare as bcryptCompare } from 'bcrypt';
+
+import { ConfigService } from '@nestjs/config';
+const configService = new ConfigService(); // Create an instance of ConfigService
+const secret_text = configService.get<string>('SECRET_TEXT'); // Assuming SECRET_TEXT is the key in your .env file
+
 /**
  * Hashes a password using bcrypt.
  * @param {string} password - The plain text password to hash.

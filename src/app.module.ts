@@ -1,19 +1,19 @@
-import {Module} from '@nestjs/common';
-import {AuthModule} from './modules/auth/auth.module';
-import {ProductsModule} from './modules/products/products.module';
-import {OrdersModule} from './modules/orders/orders.module';
-import {InvoicesModule} from './modules/invoices/invoices.module';
-import {UsersModule} from './modules/users/users.module';
-
+import { Module } from '@nestjs/common';
+import { AuthModule } from './modules/auth/auth.module';
+import { UsersModule } from './modules/users/users.module';
+import { OrmOptionsFactory } from './database';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { ConfigModule } from '@nestjs/config';
+import { ValidationEnvSchema } from './environment';
 
 @Module({
-    imports: [
-        UsersModule, AuthModule,
-        ProductsModule,
-        OrdersModule,
-        InvoicesModule],
-    controllers: [],
-    providers: [],
+  imports: [
+    ConfigModule.forRoot({ validationSchema: ValidationEnvSchema }),
+    TypeOrmModule.forRootAsync(OrmOptionsFactory),
+    UsersModule,
+    AuthModule,
+  ],
+  controllers: [],
+  providers: [],
 })
-export class AppModule {
-}
+export class AppModule {}

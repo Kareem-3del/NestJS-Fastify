@@ -1,4 +1,4 @@
-import Joi from "joi";
+import * as Joi from 'joi';
 
 /**
  * Environment variables schema for validation.
@@ -7,14 +7,10 @@ import Joi from "joi";
  * @type {Joi.ObjectSchema}
  */
 export const ValidationEnvSchema: Joi.ObjectSchema = Joi.object({
+  PORT: Joi.number().default(3000),
+  NODE_ENV: Joi.string().default('development'),
 
-    PORT: Joi.number().default(3000),
-    NODE_ENV: Joi.string().default("development"),
+  DATABASE_URL: Joi.string().required(),
 
-    DATABASE_URL: Joi.string().required(),
-
-    JWT_ACCESS_TOKEN_SECRET: Joi.string().required(),
-    JWT_ACCESS_TOKEN_EXPIRATION_TIME: Joi.number().required(),
-
+  JWT_ACCESS_TOKEN_SECRET: Joi.string().required(),
 });
-

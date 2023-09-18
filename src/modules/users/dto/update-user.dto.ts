@@ -1,4 +1,13 @@
 import { PartialType } from '@nestjs/mapped-types';
-import { CreateUserDto } from './create-user.dto';
+import { User } from '../entities/user.entity';
+import { IsEmail, IsString } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
+export class UpdateUserDto extends PartialType(User) {
+  @IsString()
+  @ApiProperty({ required: false })
+  name?: string;
 
-export class UpdateUserDto extends PartialType(CreateUserDto) {}
+  @IsEmail()
+  @ApiProperty({ required: false })
+  email?: string;
+}
