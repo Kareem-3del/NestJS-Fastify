@@ -15,7 +15,6 @@ export class UsersService {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
-    private readonly configService: ConfigService,
   ) {}
 
   async getById(id: number): Promise<User> {
